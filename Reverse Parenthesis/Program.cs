@@ -21,9 +21,7 @@ namespace Reverse_Parenthesis
 
         static int derivative(string polynomial, int x)
         {
-
             string[] intPolynomial = polynomial.Split(new string[] { " + ", " - " }, StringSplitOptions.None);
-
             return 1;
         }
 
@@ -39,8 +37,22 @@ namespace Reverse_Parenthesis
                 return s;
 
             string[] strTemp = s.Split(new char[] { '(', ')' });
-            string[] strEven = strTemp.Select((a, b) => new { Value = a, Index = b })
+            string[] strEven = new string[] { };
+            
+            if (blCheckInside == false)
+            {
+              strEven =  strTemp.Select((a, b) => new { Value = a, Index = b })
             .Where(x => x.Index % 2 != 0).Select(y => new string(y.Value.Reverse().ToArray())).Reverse().ToArray();
+            }    
+            else
+            {
+                strEven = strTemp.Select((a, b) => new { Value = a, Index = b })
+            .Where(x => x.Index % 2 != 0).Select(y => new string(y.Value.Reverse().ToArray())).ToArray();
+
+                //string[] strTempFor = new string[] { };
+                
+
+            }    
 
             string[] strEvenForElseStatement = strTemp.Select((a, b) => new { Value = a, Index = b })
             .Where(x => x.Index % 2 != 0).Select(y => new string(y.Value.Reverse().ToArray())).ToArray();
