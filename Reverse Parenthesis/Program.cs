@@ -32,7 +32,7 @@ namespace Reverse_Parenthesis
 
         }
 
-        string reverse(string s)
+        static string reverse(string s)
         {
             var l = s.LastIndexOf('(');
             if (l == -1) return s;
