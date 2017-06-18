@@ -38,21 +38,21 @@ namespace Reverse_Parenthesis
 
             string[] strTemp = s.Split(new char[] { '(', ')' });
             string[] strEven = new string[] { };
-            
+
             if (blCheckInside == false)
             {
-              strEven =  strTemp.Select((a, b) => new { Value = a, Index = b })
-            .Where(x => x.Index % 2 != 0).Select(y => new string(y.Value.Reverse().ToArray())).Reverse().ToArray();
-            }    
+                strEven = strTemp.Select((a, b) => new { Value = a, Index = b })
+              .Where(x => x.Index % 2 != 0).Select(y => new string(y.Value.Reverse().ToArray())).Reverse().ToArray();
+            }
             else
             {
                 strEven = strTemp.Select((a, b) => new { Value = a, Index = b })
             .Where(x => x.Index % 2 != 0).Select(y => new string(y.Value.Reverse().ToArray())).ToArray();
 
                 //string[] strTempFor = new string[] { };
-                
 
-            }    
+
+            }
 
             string[] strEvenForElseStatement = strTemp.Select((a, b) => new { Value = a, Index = b })
             .Where(x => x.Index % 2 != 0).Select(y => new string(y.Value.Reverse().ToArray())).ToArray();
@@ -137,6 +137,22 @@ namespace Reverse_Parenthesis
             //.Select(y => new string(y.Reverse().ToArray()))
             //.Reverse()
             //.ToArray();
+
+            /*
+             ?????? reverseParentheses(string s) {
+            return ???????(s);
+            }
+
+            string reverse(string ?) {
+                var l = s.LastIndexOf('(');
+                ?? (l == -1) return s;
+                ??? r = s.IndexOf(')', l);
+                ??? arr = s.Substring(l + ?, r - l - 1).ToCharArray();
+                ?????.Reverse(arr);
+                return reverse(?.Substring(0, l) + new ??????(arr) + s.Substring(r + ?));
+            } 
+             */
+
 
             string result = string.Join("", lstResult.ToArray());
             return result;
