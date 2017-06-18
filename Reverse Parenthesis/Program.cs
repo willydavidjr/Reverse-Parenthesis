@@ -27,135 +27,21 @@ namespace Reverse_Parenthesis
 
         static string reverseParentheses(string s)
         {
-            List<string> lstResult = new List<string>();
-            char[] strResultRegex = Regex.Replace(s, "[A-Za-z]", "").Where(x => x != ' ').ToArray();
-            bool blCheckInside = false;
 
-            if (string.Join("", strResultRegex) == "()()")
-                blCheckInside = true;
-            if (strResultRegex.Where(x => x == '(' || x == ')').Count() == 0)
-                return s;
+            return reverse(s);
 
-            string[] strTemp = s.Split(new char[] { '(', ')' });
-            string[] strEven = new string[] { };
-
-            if (blCheckInside == false)
-            {
-                strEven = strTemp.Select((a, b) => new { Value = a, Index = b })
-              .Where(x => x.Index % 2 != 0).Select(y => new string(y.Value.Reverse().ToArray())).Reverse().ToArray();
-            }
-            else
-            {
-                strEven = strTemp.Select((a, b) => new { Value = a, Index = b })
-            .Where(x => x.Index % 2 != 0).Select(y => new string(y.Value.Reverse().ToArray())).ToArray();
-
-                //string[] strTempFor = new string[] { };
-
-
-            }
-
-            string[] strEvenForElseStatement = strTemp.Select((a, b) => new { Value = a, Index = b })
-            .Where(x => x.Index % 2 != 0).Select(y => new string(y.Value.Reverse().ToArray())).ToArray();
-
-            string[] strOdd = strTemp.Select((a, b) => new { Value = a, Index = b })
-            .Where(x => x.Index % 2 == 0).Select(y => y.Value).ToArray();
-
-            int intCounter = 0;
-            int intCounterOdd = 0;
-            var intCounterParenthesis1 = s.Where(x => x == '(').Count();
-            int intCounterParenthesis = s.Where(x => x == '(').Count();
-            int intCountParent = 0;
-            if (strResultRegex[0] == strResultRegex[1])
-            {
-                for (int item = 0; item < strTemp.Length; item++)
-                {
-                    if (item % 2 == 0)
-                    {
-                        lstResult.Add(strOdd[intCounterOdd]);
-
-                        intCounterOdd++;
-                        if (intCountParent <= intCounterParenthesis)
-                        {
-                            intCountParent++;
-                        }
-                        else
-                        {
-                            intCountParent++;
-                        }
-                    }
-                    else
-                    {
-                        lstResult.Add(strEven[intCounter]);
-
-                        intCounter++;
-                        if (intCountParent <= intCounterParenthesis)
-                        {
-                            intCountParent++;
-                        }
-                        else
-                        {
-                            intCountParent++;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                for (int item = 0; item < strTemp.Length; item++)
-                {
-                    if (item % 2 == 0)
-                    {
-                        lstResult.Add(strOdd[intCounterOdd]);
-
-                        intCounterOdd++;
-                        if (intCountParent <= intCounterParenthesis)
-                        {
-                            intCountParent++;
-                        }
-                        else
-                        {
-                            intCountParent++;
-                        }
-                    }
-                    else
-                    {
-                        lstResult.Add(strEvenForElseStatement[intCounter]);
-
-                        intCounter++;
-                        if (intCountParent <= intCounterParenthesis)
-                        {
-                            intCountParent++;
-                        }
-                        else
-                        {
-                            intCountParent++;
-                        }
-                    }
-                }
-            }
-            //string[] strResult = strTemp
-            //.Select(y => new string(y.Reverse().ToArray()))
-            //.Reverse()
-            //.ToArray();
-
-            /*
-             ?????? reverseParentheses(string s) {
-            return ???????(s);
-            }
-
-            string reverse(string ?) {
-                var l = s.LastIndexOf('(');
-                ?? (l == -1) return s;
-                ??? r = s.IndexOf(')', l);
-                ??? arr = s.Substring(l + ?, r - l - 1).ToCharArray();
-                ?????.Reverse(arr);
-                return reverse(?.Substring(0, l) + new ??????(arr) + s.Substring(r + ?));
-            } 
-             */
-
-
-            string result = string.Join("", lstResult.ToArray());
-            return result;
         }
+
+        string reverse(string s)
+        {
+            var l = s.LastIndexOf('(');
+            if (l == -1) return s;
+            var r = s.IndexOf(')', l);
+            var arr = s.Substring(l + r, r - l - 1).ToCharArray();
+            Array.Reverse(arr);
+            return reverse(s.Substring(0, l) + new string(arr) + s.Substring(r + l));
+        }
+
     }
+}
 }
